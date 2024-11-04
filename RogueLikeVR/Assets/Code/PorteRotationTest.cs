@@ -2,41 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PorteRotationTest : MonoBehaviour
 {
-    float porte = 0;
-    float Ouverture = 1;
-    float timer = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("reçu");
-        
-    }
 
-    // Update is called once per frame
+    public static bool poignéetouché = false;
+    public static float Ouverture = 0;
+    public static float porte = 0;
+
+
+    public void OuvertureNord()
+    {
+        porte = 0;
+        Ouverture = 0;
+        poignéetouché = true;
+    }
     void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer > 0.02f)
+        if (poignéetouché)
         {
-            timer = 0;
+
             if (porte + Ouverture < 90)
             {
-                Ouverture += 0.2f;
+                Ouverture = 20f * Time.deltaTime;
                 porte += Ouverture;
                 transform.Rotate(0, Ouverture, 0);
             }
             else
             {
                 Ouverture = 90 - porte;
+                porte = 90;
                 transform.Rotate(0, Ouverture, 0);
+                Ouverture = 0;
+                poignéetouché = false;
             }
-            
+
+
         }
+    }
+}
+            
+    
+        
+        
         
             
 
-    }
-}
+

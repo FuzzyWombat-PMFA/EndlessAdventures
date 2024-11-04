@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        
+
         float speed = 5;
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");

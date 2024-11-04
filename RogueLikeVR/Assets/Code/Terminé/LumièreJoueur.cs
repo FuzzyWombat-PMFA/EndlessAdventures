@@ -8,7 +8,7 @@ public class LumièreJoueur : MonoBehaviour
 
 
     float defaultIntensity;
-    float intensiteactu = 0;
+    //float intensiteactu = 0;
     float timer = 0;
 
     void Start()
