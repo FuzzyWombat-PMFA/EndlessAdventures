@@ -7,35 +7,39 @@ using UnityEngine;
 public class PorteRotationTest : MonoBehaviour
 {
 
-    public static bool poignéetouché = false;
+    public static bool poignéetouchéN = false;
     public static float Ouverture = 0;
     public static float porte = 0;
+    public static int porteouverteN= 1;
 
 
     public void OuvertureNord()
     {
-        porte = 0;
-        Ouverture = 0;
-        poignéetouché = true;
+        if (!poignéetouchéN) {
+            porte = 0;
+            Ouverture = 0;
+            poignéetouchéN = true;
+        }
+        
     }
     void Update()
     {
-        if (poignéetouché)
+        if (poignéetouchéN)
         {
-
             if (porte + Ouverture < 90)
             {
-                Ouverture = 20f * Time.deltaTime;
+                Ouverture = 40f * Time.deltaTime;
                 porte += Ouverture;
-                transform.Rotate(0, Ouverture, 0);
+                transform.Rotate(0, Ouverture*porteouverteN, 0);
             }
             else
             {
                 Ouverture = 90 - porte;
-                porte = 90;
-                transform.Rotate(0, Ouverture, 0);
+                porte = 0;
+                transform.Rotate(0, Ouverture*porteouverteN, 0);
                 Ouverture = 0;
-                poignéetouché = false;
+                poignéetouchéN = false;
+                porteouverteN = porteouverteN==1 ? -1 : 1;
             }
 
 
