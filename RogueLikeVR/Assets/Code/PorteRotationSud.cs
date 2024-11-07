@@ -4,42 +4,42 @@ using UnityEngine;
 
 
 
-public class PorteRotationTest : MonoBehaviour
+public class PorteRotationSud : MonoBehaviour
 {
 
-    public static bool poignéetouchéN = false;
-    public static float Ouverture = 0;
-    public static float porte = 0;
-    public static int porteouverteN= 1;
+    static bool poignéetouchéS = false;
+    static float Ouverture = 0;
+    static float porte = 0;
+    static int porteouverteS= 1;
 
 
-    public void OuvertureNord()
+    public void OuvertureSud()
     {
-        if (!poignéetouchéN) {
+        if (!poignéetouchéS) {
             porte = 0;
             Ouverture = 0;
-            poignéetouchéN = true;
+            poignéetouchéS = true;
         }
         
     }
     void Update()
     {
-        if (poignéetouchéN)
+        if (poignéetouchéS)
         {
             if (porte + Ouverture < 90)
             {
                 Ouverture = 40f * Time.deltaTime;
                 porte += Ouverture;
-                transform.Rotate(0, Ouverture*porteouverteN, 0);
+                transform.Rotate(0, Ouverture*porteouverteS, 0);
             }
             else
             {
                 Ouverture = 90 - porte;
                 porte = 0;
-                transform.Rotate(0, Ouverture*porteouverteN, 0);
+                transform.Rotate(0, Ouverture*porteouverteS, 0);
                 Ouverture = 0;
-                poignéetouchéN = false;
-                porteouverteN = porteouverteN==1 ? -1 : 1;
+                poignéetouchéS = false;
+                porteouverteS = porteouverteS==1 ? -1 : 1;
             }
 
 

@@ -23,7 +23,7 @@ public class LumièreJoueur : MonoBehaviour
 
         if (timer > 0.1) {
             timer = 0;
-            TorcheJoueur.intensity = defaultIntensity + Random.Range(1.5f, 2f);
+            TorcheJoueur.intensity = defaultIntensity + Random.Range(1.8f, 2f);
 
         }
     }
