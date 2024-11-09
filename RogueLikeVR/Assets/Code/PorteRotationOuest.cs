@@ -10,7 +10,7 @@ public class PorteRotationOuest : MonoBehaviour
     static bool poignéetouchéO = false;
     static float Ouverture = 0;
     static float porte = 0;
-    static int porteouverteO= 1;
+    public static int porteouverteO= 1;
 
 
     public void OuvertureOuest()
