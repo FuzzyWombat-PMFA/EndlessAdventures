@@ -7,11 +7,21 @@ using UnityEngine;
 public class PorteRotationEst : MonoBehaviour
 {
 
-    static bool poignéetouchéE = false;
+    public static bool poignéetouchéE = false;
     static float Ouverture = 0;
     static float porte = 0;
     public static int porteouverteE= 1;
 
+    public void FermetureEst()
+    {
+        if (porteouverteE == -1)
+        {
+            porteouverteE = -2;
+            porte = 0;
+            Ouverture = 0;
+            poignéetouchéE = true;
+        }
+    }
 
     public void OuvertureEst()
     {
