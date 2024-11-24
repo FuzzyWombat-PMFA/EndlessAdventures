@@ -28,11 +28,30 @@ public class DeplacementSalleTest : MonoBehaviour
 
     public static void GenerationSalleOuest()
     {
-        int nombreAleatoire = Random.Range(0,4);
+
+        PositionZ = PositionZ + 1;
+
+
+        int nombreAleatoire = Random.Range(0, 4);
+
+
+        if ((PositionZ + PositionX) % 2 == 0)
+        {
+            do
+            {
+                nombreAleatoire = Random.Range(0, 4);
+            } while (nombreAleatoire % 2 != 0);
+        } 
+        else
+        {
+            do
+            {
+                nombreAleatoire = Random.Range(0, 4);
+            } while (nombreAleatoire % 2 == 0);
+        }
 
         GameObject NouvelleSalle = ListeSalles[nombreAleatoire];
 
-        PositionZ = PositionZ+1;
 
         List<int> PositionGenere = new List<int>() {PositionX,PositionZ};
 
