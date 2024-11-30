@@ -37,6 +37,9 @@ public class DeplacementSalleTest : MonoBehaviour
 
     static List<object> MapSalles = new List<object>();
 
+    static Dictionary<(int, int), int> positionsDict = new Dictionary<(int, int), int>();
+
+
     // Définition de la fonction de déplacement d'objets
 
 
@@ -121,23 +124,28 @@ public class DeplacementSalleTest : MonoBehaviour
 
         GameObject NouvelleSalle = ListeSalles[nombreAleatoire];
 
+        /*
+
         List<int> PositionGenere = new List<int>() { PositionX, PositionZ };
 
+        int Index = MapSalles.IndexOf((List<int>)PositionGenere);
 
-        int Index = MapSalles.IndexOf(PositionGenere);
-
-        Debug.Log(Index);
-
+        Debug.Log(MapSalles.Contains((List<int>)PositionGenere));
+        */
 
         GameObject salle;
+
+        /*
 
         if (Index==-1)
         {
             
             MapSalles.Add(PositionGenere);
-
             
             Index = MapSalles.IndexOf(PositionGenere);
+
+            Debug.Log(Index);
+
             MapSalles.Add(new List<object>() { NouvelleSalle, new List<object>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } });
            
             salle = (GameObject)((List<object>)MapSalles[Index+1])[0];
@@ -149,6 +157,32 @@ public class DeplacementSalleTest : MonoBehaviour
             salle = (GameObject)((List<object>)MapSalles[Index+1])[0];
 
         }
+
+        */
+        
+        var positionKey = (PositionX, PositionZ );
+
+        if (!positionsDict.ContainsKey(positionKey))
+        {
+            // Add the new position
+            positionsDict[positionKey] = MapSalles.Count;
+
+            int index = positionsDict[positionKey];
+
+            Debug.Log(index);
+            // Add the new salle and data
+            MapSalles.Add(new List<object>() { NouvelleSalle, new List<object>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } });
+
+            salle = (GameObject)((List<object>)MapSalles[index])[0];
+        }
+        else
+        {
+            // If the position is already in the dictionary
+            int index = positionsDict[positionKey];
+
+            salle = (GameObject)((List<object>)MapSalles[index])[0];
+        }
+
 
         MoveGameObject(salle,PositionX,PositionZ);
 
@@ -163,15 +197,6 @@ public class DeplacementSalleTest : MonoBehaviour
         ListeSalles.Add(Salle2);
         ListeSalles.Add(Salle3);
         ListeSalles.Add(Salle4);
-
-        DirectionOuest();
-        GenerationSalle(true);
-        DirectionNord();
-        GenerationSalle(true);
-        DirectionOuest();
-        GenerationSalle(true);
-        DirectionNord();
-        GenerationSalle(true);
 
     }
 

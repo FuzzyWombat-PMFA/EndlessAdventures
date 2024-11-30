@@ -16,7 +16,7 @@ public class PorteRotationOuest : MonoBehaviour
     {
         if (porteouverteO == -1)
         {
-            porteouverteO = -2;
+            porteouverteO = -1;
             porte = 0;
             Ouverture = 0;
             poignéetouchéO = true;
