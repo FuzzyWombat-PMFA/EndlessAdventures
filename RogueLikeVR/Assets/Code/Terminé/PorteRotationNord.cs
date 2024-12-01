@@ -96,9 +96,9 @@ public class PorteRotationNord : MonoBehaviour
     */
 
     public static bool poignéetouchéN = false; // Door handle touched state
-    static float Ouverture = 0; // Rotation increment
+    //static float Ouverture = 0; // Rotation increment
     static float porte = 90; // Current rotation of the door (starts at 90 degrees)
-    static int objectif = 180; // Target rotation for the door (either 90 or 180)
+    static int objectif = 90; // Target rotation for the door (either 90 or 180)
     public static int porteouverteN = 1; // Direction of movement (1 = opening, -1 = closing)
     static bool ajusté = true;
 
@@ -128,7 +128,7 @@ public class PorteRotationNord : MonoBehaviour
                 porte = 90; // Start the door from 90 degrees (fully closed)
             }
 
-            Ouverture = 0; // Reset the opening increment
+            //Ouverture = 0; // Reset the opening increment
             poignéetouchéN = true; // Trigger the opening process
         }
     }

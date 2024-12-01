@@ -6,53 +6,101 @@ using UnityEngine;
 
 public class PorteRotationEst : MonoBehaviour
 {
-
-    public static bool poignéetouchéE = false;
-    static float Ouverture = 0;
-    static float porte = 0;
-    public static int porteouverteE= 1;
+    public static bool poignéetouchéE = false; // Door handle touched state
+    //static float Ouverture = 0; // Rotation increment
+    static float porte = 180; // Current rotation of the door (starts at 90 degrees)
+    static int objectif = 180; // Target rotation for the door (either 90 or 180)
+    public static int porteouverteE = 1; // Direction of movement (1 = opening, -1 = closing)
+    static bool ajusté = true;
 
     public void FermetureEst()
     {
         if (porteouverteE == -1)
         {
-            porteouverteE = -1;
-            porte = 0;
-            Ouverture = 0;
-            poignéetouchéE = true;
+            objectif = 180; // Set the target for closing
+            porte = 270; // Start the door from 180 degrees (fully opened)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            porteouverteE = 1; // Change direction to open the door
         }
     }
 
     public void OuvertureEst()
     {
-        if (!poignéetouchéE) {
-            porte = 0;
-            Ouverture = 0;
-            poignéetouchéE = true;
+        if (!poignéetouchéE)
+        {
+            if (porteouverteE == -1)
+            {
+                objectif = 180; // Set the target for opening
+                porte = 270; // Start the door from 180 degrees (fully closed)
+            }
+            else
+            {
+                objectif = 270; // Set the target for opening
+                porte = 180; // Start the door from 90 degrees (fully closed)
+            }
+
+            //Ouverture = 0; // Reset the opening increment
+            poignéetouchéE = true; // Trigger the opening process
         }
-        
     }
+
     void Update()
     {
         if (poignéetouchéE)
         {
-            if (porte + Ouverture < 90)
+            // Opening the door (porteouverteN == 1)
+            if (porteouverteE == 1)
             {
-                Ouverture = 40f * Time.deltaTime;
-                porte += Ouverture;
-                transform.Rotate(0, Ouverture*porteouverteE, 0);
+                // Calculate the potential new position for the door
+                float newRotation = porte + 25f * Time.deltaTime * porteouverteE;
+
+                // If we are about to overshoot the target, stop at 'objectif'
+                if (newRotation >= objectif)
+                {
+                    newRotation = objectif; // Set the rotation to the target exactly
+                }
+
+                // Apply the rotation
+                porte = newRotation;
+                transform.rotation = Quaternion.Euler(0, porte, 0);
+
+                // If we've reached the target with a tolerance, stop the movement and change direction
+                if (Mathf.Abs(porte - objectif) < 0.1f)
+                {
+                    poignéetouchéE = false; // Stop the movement
+                    porteouverteE = -1; // Change direction to close the door
+                    ajusté = true;
+                }
             }
-            else
+            // Closing the door (porteouverteN == -1)
+            else if (porteouverteE == -1)
             {
-                Ouverture = 90 - porte;
-                porte = 0;
-                transform.Rotate(0, Ouverture*porteouverteE, 0);
-                Ouverture = 0;
-                poignéetouchéE = false;
-                porteouverteE = porteouverteE==1 ? -1 : 1;
+                // Calculate the potential new position for the door
+                float newRotation = porte + 25f * Time.deltaTime * porteouverteE;
+
+                // If we are about to overshoot the target, stop at 'objectif'
+                if (newRotation <= objectif)
+                {
+                    newRotation = objectif; // Set the rotation to the target exactly
+                }
+
+                // Apply the rotation
+                porte = newRotation;
+                transform.rotation = Quaternion.Euler(0, porte, 0);
+
+                // If we've reached the target with a tolerance, stop the movement and change direction
+                if (Mathf.Abs(porte - objectif) < 0.1f)
+                {
+                    poignéetouchéE = false; // Stop the movement
+                    porteouverteE = 1; // Change direction to open the door
+                    ajusté = true;
+                }
             }
-
-
+        }
+        else if (ajusté)
+        {
+            transform.rotation = Quaternion.Euler(0, objectif, 0);
+            ajusté = false;
         }
     }
 }
