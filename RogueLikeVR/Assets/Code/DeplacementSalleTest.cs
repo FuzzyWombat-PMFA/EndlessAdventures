@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.Events;
+
+
 public class DeplacementSalleTest : MonoBehaviour
 {
     //Déclaration des variables salles (à mettre dans l'inspecteur)
@@ -12,6 +15,9 @@ public class DeplacementSalleTest : MonoBehaviour
     public GameObject Salle2;
     public GameObject Salle3;
     public GameObject Salle4;
+
+    //Event UnityReset
+
 
     //Parité de la salle pour éviter des problèmes avec le backtracking
 
@@ -114,16 +120,8 @@ public static void MoveGameObject(GameObject A,int X,int Z)
         PosXTest = (JoueurObjet.transform.position.x-10.875)/33.75f;
         PosZTest = (JoueurObjet.transform.position.z-10.875)/33.75f;
 
-        Debug.Log(JoueurObjet.transform.position.x);
-
-        Debug.Log(JoueurObjet.transform.position.z);
-
         PositionX = -(int)System.Math.Round(PosXTest) + AjoutX;
         PositionZ = -(int)System.Math.Round(PosZTest) + AjoutZ;
-
-        Debug.Log(PositionX);
-
-        Debug.Log(PositionZ);
 
         
             int nombreAleatoire = Random.Range(0, 4);
@@ -196,7 +194,6 @@ public static void MoveGameObject(GameObject A,int X,int Z)
 
                 int index = positionsDict[positionKey];
 
-                Debug.Log(index);
                 // Add the new salle and data
                 MapSalles.Add(new List<object>() { NouvelleSalle, new List<object>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } });
 
@@ -205,14 +202,22 @@ public static void MoveGameObject(GameObject A,int X,int Z)
             else
             {
                 // If the position is already in the dictionary
-
+                 
                 int index = positionsDict[positionKey];
 
                 salle = (GameObject)((List<object>)MapSalles[index])[0];
             }
 
+        salle.SendMessage("Fermetout",salle);
 
-            MoveGameObject(salle, PositionX, PositionZ);
+        if (salle == ListeSalles[0])
+        {
+            Debug.Log("OhShit");
+        }
+
+        Debug.Log(PositionX+" "+PositionZ);
+
+        MoveGameObject(salle, PositionX, PositionZ);
 
         
     }

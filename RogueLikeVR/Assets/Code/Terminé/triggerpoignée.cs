@@ -7,6 +7,7 @@ public class triggerpoignée : MonoBehaviour
 {
     public UnityEvent OnEnterTrigger;
 
+
     //private Collider _collider;
     //private void Awake()
     //{
@@ -20,7 +21,9 @@ public class triggerpoignée : MonoBehaviour
     private LayerMask _layerToDetect = -1;
 
 
-
+    void Start()
+    {
+    }
 
 
     private void OnTriggerEnter(Collider other) 

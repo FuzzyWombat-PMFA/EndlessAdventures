@@ -95,22 +95,24 @@ public class PorteRotationNord : MonoBehaviour
     }
     */
 
-    public static bool poignéetouchéN = false; // Door handle touched state
+    private static bool poignéetouchéN = false; // Door handle touched state
     //static float Ouverture = 0; // Rotation increment
-    static float porte = 90; // Current rotation of the door (starts at 90 degrees)
-    static int objectif = 90; // Target rotation for the door (either 90 or 180)
-    public static int porteouverteN = 1; // Direction of movement (1 = opening, -1 = closing)
-    static bool ajusté = true;
+    private static float porte = 90; // Current rotation of the door (starts at 90 degrees)
+    private static int objectif = 90; // Target rotation for the door (either 90 or 180)
+    private static int porteouverteN = 1; // Direction of movement (1 = opening, -1 = closing)
+    private static bool ajusté = true;
+
 
     public void FermetureNord()
     {
-        if (porteouverteN == -1)
-        {
-            objectif = 90; // Set the target for closing
-            porte = 180; // Start the door from 180 degrees (fully opened)
-            transform.rotation = Quaternion.Euler(0, 90, 0);
-            porteouverteN = 1; // Change direction to open the door
-        }
+        //if (porteouverteN == -1)
+        //{
+        objectif = 90; // Set the target for closing
+        porte = 90; // Start the door from 180 degrees (fully opened)
+        transform.rotation = Quaternion.Euler(0, 90, 0);
+        porteouverteN = 1; // Change direction to open the door
+        poignéetouchéN = false;
+        //}
     }
 
     public void OuvertureNord()

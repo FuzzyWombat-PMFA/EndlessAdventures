@@ -6,22 +6,23 @@ using UnityEngine;
 
 public class PorteRotationEst : MonoBehaviour
 {
-    public static bool poignéetouchéE = false; // Door handle touched state
+    private static bool poignéetouchéE = false; // Door handle touched state
     //static float Ouverture = 0; // Rotation increment
-    static float porte = 180; // Current rotation of the door (starts at 90 degrees)
-    static int objectif = 180; // Target rotation for the door (either 90 or 180)
-    public static int porteouverteE = 1; // Direction of movement (1 = opening, -1 = closing)
-    static bool ajusté = true;
+    private static float porte = 180; // Current rotation of the door (starts at 90 degrees)
+    private static int objectif = 180; // Target rotation for the door (either 90 or 180)
+    private static int porteouverteE = 1; // Direction of movement (1 = opening, -1 = closing)
+    private static bool ajusté = true;
 
     public void FermetureEst()
     {
-        if (porteouverteE == -1)
-        {
+        //if (porteouverteE == -1)
+        //{
             objectif = 180; // Set the target for closing
             porte = 270; // Start the door from 180 degrees (fully opened)
             transform.rotation = Quaternion.Euler(0, 180, 0);
             porteouverteE = 1; // Change direction to open the door
-        }
+            poignéetouchéE = false;
+        //}
     }
 
     public void OuvertureEst()
