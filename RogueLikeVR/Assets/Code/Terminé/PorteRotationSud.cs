@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class PorteRotationSud : MonoBehaviour
 {
-    private static bool poignéetouchéS = false; // Door handle touched state
+    private bool poignéetouchéS = false; // Door handle touched state
     //static float Ouverture = 0; // Rotation increment
-    private static float porte = 270; // Current rotation of the door (starts at 90 degrees)
-    private static int objectif = 270; // Target rotation for the door (either 90 or 180)
-    private static int porteouverteS = 1; // Direction of movement (1 = opening, -1 = closing)
-    private static bool ajusté = true;
+    private float porte = 270; // Current rotation of the door (starts at 90 degrees)
+    private int objectif = 270; // Target rotation for the door (either 90 or 180)
+    private int porteouverteS = 1; // Direction of movement (1 = opening, -1 = closing)
+    private bool ajusté = true;
 
     public void FermetureSud()
     {
@@ -54,7 +54,7 @@ public class PorteRotationSud : MonoBehaviour
             if (porteouverteS == 1)
             {
                 // Calculate the potential new position for the door
-                float newRotation = porte + 25f * Time.deltaTime * porteouverteS;
+                float newRotation = porte + 100f * Time.deltaTime * porteouverteS;
 
                 // If we are about to overshoot the target, stop at 'objectif'
                 if (newRotation >= objectif)
@@ -78,7 +78,7 @@ public class PorteRotationSud : MonoBehaviour
             else if (porteouverteS == -1)
             {
                 // Calculate the potential new position for the door
-                float newRotation = porte + 25f * Time.deltaTime * porteouverteS;
+                float newRotation = porte + 100f * Time.deltaTime * porteouverteS;
 
                 // If we are about to overshoot the target, stop at 'objectif'
                 if (newRotation <= objectif)

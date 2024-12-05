@@ -18,6 +18,9 @@ public class triggerpoignée : MonoBehaviour
     [Header ("Filters")]
     [SerializeField]
     private GameObject _objetspécifique = null;
+
+    [Header("Layer")]
+    [SerializeField]
     private LayerMask _layerToDetect = -1;
 
 
