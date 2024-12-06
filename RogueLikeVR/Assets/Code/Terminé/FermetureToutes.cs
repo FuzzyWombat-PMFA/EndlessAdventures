@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq; // For LINQ (e.g., FirstOrDefault)
 
 public class FermetureToutes : MonoBehaviour
 {
@@ -17,22 +18,77 @@ public class FermetureToutes : MonoBehaviour
 
     public void ResetCaillou(GameObject LaSalle)
     {
-        CaillouNord = GameObject.Find("/" + LaSalle.name + "/" + "PileRocheNord");
+        CaillouNord = null;
 
-        CaillouNord.SetActive(true);
+        foreach (Transform child in LaSalle.transform)
+        {
+            if (child.name == "PileRocheNord")
+            {
+                CaillouNord = child.gameObject;
+            }
+        }
 
-        CaillouSud = GameObject.Find("/" + LaSalle.name + "/" + "PileRocheSud");
+        CaillouSud = null;
 
-        CaillouSud.SetActive(true);
+        foreach (Transform child in LaSalle.transform)
+        {
+            if (child.name == "PileRocheSud")
+            {
+                CaillouSud = child.gameObject;
+            }
+        }
 
-        CaillouEst = GameObject.Find("/" + LaSalle.name + "/" + "PileRocheEst");
+        CaillouEst = null;
 
-        CaillouEst.SetActive(true);
+        foreach (Transform child in LaSalle.transform)
+        {
+            if (child.name == "PileRocheEst")
+            {
+                CaillouEst = child.gameObject;
+            }
+        }
 
-        CaillouOuest = GameObject.Find("/" + LaSalle.name + "/" + "PileRocheOuest");
+        CaillouOuest = null;
 
-        CaillouOuest.SetActive(true);
+        foreach (Transform child in LaSalle.transform)
+        {
+            if (child.name == "PileRocheOuest")
+            {
+                CaillouOuest = child.gameObject;
+            }
+        }
+        /*
+        CaillouNord = GameObject.FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.name == "PileRocheNord");
+
+        CaillouSud = GameObject.FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.name == "PileRocheSud");
+
+        CaillouEst = GameObject.FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.name == "PileRocheEst");
+
+        CaillouOuest = GameObject.FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.name == "PileRocheOuest");
+        */
+
+        //CaillouNord = GameObject.Find("/" + LaSalle.name + "/" + "PileRocheNord");
+
+        CaillouNord.SetActive(false);
+
+        //CaillouSud = GameObject.Find("/" + LaSalle.name + "/" + "PileRocheSud");
+
+        CaillouSud.SetActive(false);
+
+        //CaillouEst = GameObject.Find("/" + LaSalle.name + "/" + "PileRocheEst");
+
+        CaillouEst.SetActive(false);
+
+        //CaillouOuest = GameObject.Find("/" + LaSalle.name + "/" + "PileRocheOuest");
+
+        CaillouOuest.SetActive(false);
+
+        
+
+
     }
+
+
     public void Fermetout(GameObject LaSalle)
     {
 
