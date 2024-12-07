@@ -257,6 +257,7 @@ public static void MoveGameObject(GameObject A,int X,int Z)
 
 
         List<bool> Caillous = new List<bool>() { };
+        List<bool> Torches = new List<bool>() { };
 
         if (!positionsDict.ContainsKey(positionKey))
         {
@@ -286,7 +287,6 @@ public static void MoveGameObject(GameObject A,int X,int Z)
                 }
                 
             }
-
             else
             {
                 Caillous.Add(false);
@@ -294,8 +294,22 @@ public static void MoveGameObject(GameObject A,int X,int Z)
                 Caillous.Add(false);
                 Caillous.Add(false);
             }
+
+
+            for (int i = 0; i < 8; i++)
+            {
+                if (Random.Range(0, 2) == 1)
+                {
+                    Torches.Add(false);
+                }
+                else
+                {
+                    Torches.Add(true);
+                }
+
+            }
             
-            MapSalles.Add(new List<object>() { NouvelleSalle, new List<object>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, Caillous });
+            MapSalles.Add(new List<object>() { NouvelleSalle, new List<object>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, Caillous , Torches});
             salle = (GameObject)((List<object>)MapSalles[index])[0];
         }
 
@@ -305,27 +319,27 @@ public static void MoveGameObject(GameObject A,int X,int Z)
             salle = (GameObject)((List<object>)MapSalles[index])[0];
             Debug.Log(index);
             Caillous = (List<bool>)((List<object>)MapSalles[index])[2];
+            Torches = (List<bool>)((List<object>)MapSalles[index])[3];
         }
 
         salle.SendMessage("Fermetout", salle);
 
 
-        //salle.SendMessage("PlacementCaillou", salle);
-
         //salle.SendMessage("ResetCaillou", salle);
-
+        /*
         Caillous.Add(false);
         Caillous.Add(false);
         Caillous.Add(false);
         Caillous.Add(false);
-
+        */
 
         List<object> Arguments = new List<object>() {salle, Caillous[0], Caillous[1], Caillous[2], Caillous[3] };
 
-        Debug.Log(Arguments);
-
         salle.SendMessage("PlacementCaillou", Arguments);
 
+        List<object> Arguments2 = new List<object>() { salle, Torches[0], Torches[1], Torches[2], Torches[3], Torches[4], Torches[5], Torches[6], Torches[7] };
+
+        salle.SendMessage("AllumageTorches", Arguments2);
 
         Debug.Log(PositionX + " " + PositionZ);
         MoveGameObject(salle, PositionX, PositionZ);
@@ -341,7 +355,7 @@ public static void MoveGameObject(GameObject A,int X,int Z)
         ListeSalles.Add(Salle4);
         positionsDict[(0,0)] = MapSalles.Count;
 
-        MapSalles.Add(new List<object>() { Salle1, new List<object>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, new List<bool>() { false, false, false, false } });
+        MapSalles.Add(new List<object>() { Salle1, new List<object>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, new List<bool>() { false, false, false, false } , new List<bool>() { true, true, true, true, true, true, true, true } });
 
     }
 

@@ -16,6 +16,10 @@ public class FermetureToutes : MonoBehaviour
     private GameObject PorteEst;
     private GameObject PorteOuest;
 
+    private GameObject Torche;
+
+    private List<string> ListeTorches = new List<string>() { "Torche N1", "Torche N2", "Torche E1", "Torche E2", "Torche W1", "Torche W2", "Torche S1", "Torche S2", };
+
     public void ResetCaillou(GameObject LaSalle)
     {
         CaillouNord = null;
@@ -84,6 +88,30 @@ public class FermetureToutes : MonoBehaviour
         CaillouOuest.SetActive(false);
 
         
+
+
+    }
+
+    public void AllumageTorches(List<object> Arguments2)
+    {
+        GameObject LaSalle = (GameObject)(Arguments2[0]);
+
+        Torche = null;
+
+        foreach (Transform child in LaSalle.transform)
+        {
+            if (child.name == "Torche N1" || child.name == "Torche N2" || child.name == "Torche E1" || child.name == "Torche E2" || child.name == "Torche W1" || child.name == "Torche W2" || child.name == "Torche S1" || child.name == "Torche S2" )
+            {
+                Torche = child.gameObject;
+                Debug.Log(ListeTorches.IndexOf(Torche.name) + 1);
+                Torche.SetActive((bool)Arguments2[ListeTorches.IndexOf(Torche.name)+1]);
+
+            }
+        }
+
+       
+
+
 
 
     }
